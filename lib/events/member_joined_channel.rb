@@ -1,5 +1,5 @@
 SlackRubyBotServer::Events.configure do |config|
-  config.on :event, ['event_callback', 'member_joined_channel'] do |event|
+  config.on :event, ['member_joined_channel'] do |event|
     team = Team.where(team_id: event[:event][:team]).first || raise("Cannot find team with ID #{event[:event][:team]}.")
 
     slack_client = Slack::Web::Client.new(token: team.token)
