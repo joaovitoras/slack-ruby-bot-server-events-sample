@@ -18,7 +18,7 @@ SlackRubyBotServer::Events.configure do |config|
       blocks: [
         {
           type: 'input',
-          block_id: "user_selected",
+          block_id: 'user_selected',
           element: {
             type: 'users_select',
             placeholder: {
@@ -30,13 +30,13 @@ SlackRubyBotServer::Events.configure do |config|
           },
           label: {
             type: 'plain_text',
-            text: 'Pessoa',
+            text: 'Destinatário',
             emoji: true
           }
         },
         {
           type: 'input',
-          block_id: "message",
+          block_id: 'message',
           label: {
             type: 'plain_text',
             text: 'Mensagem'
@@ -46,7 +46,7 @@ SlackRubyBotServer::Events.configure do |config|
             type: 'plain_text_input',
             placeholder: {
               type: 'plain_text',
-              text: 'Mensagem... '
+              text: 'Mensagem... ',
             },
             multiline: true
           }

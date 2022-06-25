@@ -11,5 +11,6 @@ ActiveRecord::Base.connection.create_table :mails, if_not_exists: true do |t|
   t.string :from_user_id, if_not_exists: true
   t.string :to_user_id, if_not_exists: true
   t.string :text, if_not_exists: true
+  t.boolean :sent, default: false, if_not_exists: true
   t.timestamps
 end

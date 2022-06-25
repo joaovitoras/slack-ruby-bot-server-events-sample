@@ -1,19 +1,31 @@
 module Helpers
   class DisplayHome
     def self.perform(slack_client, team, user_id)
-      mails = []
-      team.mails.find_each do |mail|
-        mails << [
-          { type: 'divider' },
-          { type: 'section', text: { type: 'mrkdwn', text: '*Correios enviados*' } },
+      sent_mails = []
+      received_mails = []
+      team.mails.where(from_user_id: user_id).find_each do |mail|
+        sent_mails << [
           {
             type: 'section',
             text: {
               type: 'mrkdwn',
-              text: "<@#{mail.to_user_id}>\n\n#{mail.text}"
+              text: "Para: <@#{mail.to_user_id}>\n\nMensagem: #{mail.text}"
             }
-          }
-          { type: 'divider' },
+          },
+          { type: 'divider' }
+        ]
+      end
+
+      team.mails.where(to_user_id: user_id).find_each do |mail|
+        received_mails << [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: "Mensagem: #{mail.text}"
+            }
+          },
+          { type: 'divider' }
         ]
       end
 
@@ -43,7 +55,19 @@ module Helpers
         },
         { type: 'divider' },
         { type: 'section', text: { type: 'mrkdwn', text: '*Correios enviados*' } },
-        mails
+        sent_mails,
+        {
+          type: 'context',
+          elements: [
+            {
+              type: 'image',
+              image_url: 'https://api.slack.com/img/blocks/bkb_template_images/placeholder.png',
+              alt_text: 'placeholder'
+            }
+          ]
+        },
+        { type: 'section', text: { type: 'mrkdwn', text: '*Correios Recebidos*' } },
+        received_mails
       ].flatten
 
       view = {

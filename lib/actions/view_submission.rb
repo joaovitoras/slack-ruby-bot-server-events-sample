@@ -12,6 +12,7 @@ SlackRubyBotServer::Events.configure do |config|
       to_user_id: payload[:view][:state][:values][:user_selected][:'users_select-action'][:selected_user],
       text: payload[:view][:state][:values][:message][:content][:value]
     )
+
     Helpers::DisplayHome.perform(slack_client, team, payload[:user][:id])
     nil
   end
