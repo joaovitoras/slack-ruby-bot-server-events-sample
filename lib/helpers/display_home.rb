@@ -37,7 +37,10 @@ module Helpers
             text: 'Bem vindo ao Correio Elegante Quero!'
           }
         },
-        {
+      ]
+
+      if team.active?
+        blocks << {
           type: 'actions',
           elements: [
             {
@@ -52,7 +55,10 @@ module Helpers
               value: 'open_mail_modal'
             }
           ]
-        },
+        }
+      end
+
+      blocks << [
         { type: 'divider' },
         { type: 'section', text: { type: 'mrkdwn', text: '*Correios enviados*' } },
         sent_mails,
