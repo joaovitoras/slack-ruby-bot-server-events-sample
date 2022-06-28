@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User
-  def sync(slack_user_id, team)
+  def self.sync(slack_user_id, team)
     return if exists?(slack_id: slack_user_id, team: team)
 
     slack_client = Slack::Web::Client.new(token: team.token)
