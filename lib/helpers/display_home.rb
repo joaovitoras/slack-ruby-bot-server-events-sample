@@ -74,11 +74,11 @@ module Helpers
         },
         { type: 'section', text: { type: 'mrkdwn', text: '*Correios Recebidos*' } },
         received_mails
-      ].flatten
+      ]
 
       view = {
         type: 'home',
-        blocks: blocks
+        blocks: blocks.flatten
       }
 
       slack_client.views_publish(user_id: user_id, view: view)
