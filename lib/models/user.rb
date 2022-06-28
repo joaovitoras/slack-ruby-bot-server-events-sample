@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User
+class User < ActiveRecord::Base
   def self.sync(slack_user_id, team)
     return if exists?(slack_id: slack_user_id, team: team)
 
