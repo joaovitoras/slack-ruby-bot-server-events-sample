@@ -9,5 +9,8 @@ class Mail < ActiveRecord::Base
     message = "Novo correio elegante: #{text}"
     slack_client.chat_postMessage(channel: to_user_id, text: message)
     update(sent: true)
+
+    User.sync(from_user_id, team)
+    User.sync(to_user_id, team)
   end
 end
