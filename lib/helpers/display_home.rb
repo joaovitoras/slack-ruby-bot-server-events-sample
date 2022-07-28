@@ -36,11 +36,11 @@ module Helpers
             type: 'plain_text',
             text: 'Bem vindo ao Correio Elegante Quero!'
           }
-        },
+        }
       ]
 
       if team.active?
-        blocks << {
+        blocks << [{
           type: 'actions',
           elements: [
             {
@@ -55,7 +55,7 @@ module Helpers
               value: 'open_mail_modal'
             }
           ]
-        }
+        }]
       end
 
       blocks << [
